@@ -6,7 +6,10 @@
     "start": "nodemon src/index.ts",
     "build": "tsc",
     "serve": "node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,json}'"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,10 @@
     "@types/mongodb": "^4.0.6",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^22.15.17",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.26.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
@@ -27,6 +34,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mongodb": "^6.16.0",
-    "mongoose": "^8.14.2"
+    "mongoose": "^8.14.2",
+    "winston": "^3.17.0"
   }
 }

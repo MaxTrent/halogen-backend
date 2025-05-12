@@ -11,7 +11,9 @@ let envVars:any;
 async function getEnvVars() {
 try{
     const env = await vine.object({
-        PORT: vine.number()
+        NODE_ENV: vine.enum(["development", "production"]),
+        PORT: vine.number(),
+        DB_CONNECTION_URL: vine.string(),
     });
 
     const validator = vine.compile(env);
@@ -24,3 +26,13 @@ if (e instanceof errors.E_VALIDATION_ERROR){
 }
     
 }
+
+envVars = getEnvVars();
+
+const config = {
+    env: envVars.NODE_ENV,
+    port: envVars.PORT,
+    dbUrl: envVars.DB_CONNECTION_URL,
+}
+
+export {config};
