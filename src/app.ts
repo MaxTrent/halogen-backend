@@ -1,10 +1,10 @@
 import express from "express";
 import { config } from "./config";
+import bootstrap from "./startup/bootstrap";
 
 const app = express();
 
-app.listen(config.port, () => {
-    console.log(`Server is running on port ${config.port}`);
-});
+bootstrap(app);
+
 
 export default app;

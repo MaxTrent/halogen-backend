@@ -3,17 +3,18 @@ import dotenv from "dotenv";
 import { config } from "../../config";
 dotenv.config();
 
-
-export const connectToDatabase = async ()=> {
-    console.log("connecting to mongodb");
-    let connection;
-    try{
-        connection = await mongoose.connect(config.dbUrl);
-        console.log("connected successfully to db");
-        return connection;
+export const connectToDatabase = async () => {
+  console.log("connecting to mongodb");
+  let connection;
+  try {
+    connection = await mongoose.connect(config.dbUrl);
+    console.log("connected successfully to db");
+    return connection;
+  } catch (err) {
+    if (err instanceof Error) {
+      console.log("Error connecting to mongo", err.message);
+    } else {
+      console.log("Unknown error", err);
     }
-    catch(err){
-        console.log("Error connecting to MongoDB:", err.message);
-        // throw new Error("MongoDB connection failed");
-    }
+  }
 };
