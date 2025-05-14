@@ -1,10 +1,19 @@
-import express from "express";
-import { config } from "./config";
-import bootstrap from "./startup/bootstrap";
+import express, { Express } from 'express';
+import { errorMiddleware } from './middleware/error.middleware';
+import { loggerMiddleware } from './middleware/logger.middleware';
+import { logger } from './utils/logger';
+import { userRoutes } from './routes/user.route';
 
-const app = express();
+export const createApp = (): Express => {
+  const app = express();
 
-bootstrap(app);
+  app.use(express.json());
+  app.use(loggerMiddleware);
 
+  app.use('/api/users', userRoutes);
 
-export default app;
+  app.use(errorMiddleware);
+
+  logger.info('Express app configured');
+  return app;
+};
