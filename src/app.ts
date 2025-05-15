@@ -4,6 +4,7 @@ import { loggerMiddleware } from './middleware/logger.middleware';
 import { logger } from './utils/logger';
 import { userRoutes } from './routes/user.route';
 
+
 export const createApp = (): Express => {
   const app = express();
 

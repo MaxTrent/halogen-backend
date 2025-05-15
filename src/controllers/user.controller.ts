@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { CreateUserSchema, UpdateUserSchema } from '../models/user.model';
-import { userService } from '../services/user.service';
-import { logger } from '../utils/logger';
 import { StatusCodes } from 'http-status-codes';
+import { CreateUserSchema, UpdateUserSchema } from '../models/user.model';
+import { logger } from '../utils/logger';
+import { userService } from '../services/user.service';
 import { CustomError } from '../utils/custom-error';
 
 export const userController = {

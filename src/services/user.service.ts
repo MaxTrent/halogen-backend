@@ -1,7 +1,8 @@
-import { User, IUser, CreateUserSchema, UpdateUserSchema } from '../models/user.model';
+
 import { StatusCodes } from 'http-status-codes';
-import { logger } from '../utils/logger';
 import { z } from 'zod';
+import { CreateUserSchema, IUser, UpdateUserSchema, User } from '../models/user.model';
+import { logger } from '../utils/logger';
 
 export const userService = {
   async createUser(data: z.infer<typeof CreateUserSchema>): Promise<IUser> {

@@ -1,11 +1,12 @@
+import { createApp } from "./app";
+import { connectDB } from "./config/database";
+import { initializeConfig } from "./config/env";
+import { logger } from "./utils/logger";
 
-import { createApp } from './app';
-import { connectDB } from './config/database';
-import { config } from './config/env';
-import { logger } from './utils/logger';
 
 const startServer = async () => {
   try {
+    const config = await initializeConfig();
     await connectDB();
     const app = createApp();
     app.listen(config.port, () => {
