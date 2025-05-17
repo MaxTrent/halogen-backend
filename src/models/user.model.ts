@@ -1,12 +1,27 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
+interface ISpouse {
+  title: string;
+  gender: string;
+  firstName: string;
+  lastName: string;
+  ageRange: string;
+}
+
 interface IUser extends Document {
   fullname: string;
   email: string;
   password: string;
   phoneNumber?: string;
   isVerified: boolean;
+  title?: string;
+  gender?: string;
+  firstName?: string;
+  lastName?: string;
+  maritalStatus?: string;
+  ageRange?: string;
+  spouse?: ISpouse;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -17,6 +32,22 @@ const userSchema = new Schema<IUser>(
     password: { type: String, required: true },
     phoneNumber: { type: String, trim: true },
     isVerified: { type: Boolean, default: false },
+    title: { type: String, trim: true, enum: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof'] },
+    gender: { type: String, trim: true, enum: ['Male', 'Female', 'Other'] },
+    firstName: { type: String, trim: true },
+    lastName: { type: String, trim: true },
+    maritalStatus: { type: String, trim: true, enum: ['Single', 'Married', 'Divorced', 'Widowed'] },
+    ageRange: { type: String, trim: true, enum: ['18-24', '25-34', '35-44', '45-54', '55+'] },
+    spouse: {
+      type: new Schema({
+        title: { type: String, trim: true, enum: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof'] },
+        gender: { type: String, trim: true, enum: ['Male', 'Female', 'Other'] },
+        firstName: { type: String, trim: true },
+        lastName: { type: String, trim: true },
+        ageRange: { type: String, trim: true, enum: ['18-24', '25-34', '35-44', '45-54', '55+'] },
+      }),
+      default: null,
+    },
   },
   { timestamps: true }
 );
